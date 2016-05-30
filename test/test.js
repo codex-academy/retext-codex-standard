@@ -9,7 +9,7 @@
 
 var tap = require('tap');
 var retext = require('retext');
-var mapbox = require('../lib/standard');
+var codex = require('../lib/standard');
 var stripLiquid = require('../lib/strip_liquid');
 
 /*
@@ -23,14 +23,14 @@ var stripLiquid = require('../lib/strip_liquid');
  * @return {Array.<VFileMessage>} - Virtual messages.
  */
 function process(doc) {
-    return mapbox(doc).messages.map(String);
+    return codex(doc).messages.map(String);
 }
 
 /*
  * Tests.
  */
 
-tap.test('retext-mapbox', function (t) {
+tap.test('retext-codex', function (t) {
     var doc;
 
     t.same(
@@ -48,15 +48,15 @@ tap.test('retext-mapbox', function (t) {
     );
 
     t.same(
-        process('We work at MapBox'),
-        ['1:12-1:18: Replace “MapBox” with “Mapbox”'],
-        'Mapbox (wrong)'
+        process('We work at codex'),
+        ['1:12-1:17: Replace “codex” with “codeX”'],
+        'codex (wrong)'
     );
 
     t.same(
-        process('We work at Mapbox'),
+        process('We work at codeX'),
         [],
-        'Mapbox (correct)'
+        'codeX (correct)'
     );
 
     t.same(

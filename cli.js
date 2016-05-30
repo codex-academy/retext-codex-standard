@@ -4,8 +4,8 @@
  * @author Titus Wormer
  * @copyright 2015 Titus Wormer
  * @license MIT
- * @module mapbox
- * @fileoverview CLI for mapbox.
+ * @module codex
+ * @fileoverview CLI for codex.
  */
 
 'use strict';
@@ -28,7 +28,7 @@ var findDown = require('vfile-find-down');
 var findUp = require('vfile-find-up');
 var format = require('vfile-reporter');
 var toFile = require('to-vfile');
-var mapboxStandard = require('./lib/standard');
+var codexStandard = require('./lib/standard');
 var pack = require('./package');
 
 /*
@@ -43,7 +43,7 @@ var stat = fs.statSync;
  */
 
 var expextPipeIn = !process.stdin.isTTY;
-var IGNORE = '.mapboxignore';
+var IGNORE = '.codexignore';
 var ENCODING = 'utf-8';
 var BACKSLASH = '\\';
 var SLASH = '/';
@@ -73,7 +73,7 @@ var extensions = [
 
 var cli = meow({
     'help': [
-        'Usage:  retext-mapbox-standard [<file> | <dir> ...] [-w, --why] [-t, --text]',
+        'Usage:  retext-codex-standard [<file> | <dir> ...] [-w, --why] [-t, --text]',
         '',
         'Options:',
         '',
@@ -83,9 +83,9 @@ var cli = meow({
         'files in the current directory, `doc`, and `docs`.',
         '',
         'Examples',
-        '  $ echo "His network looks good" | retext-mapbox-standard',
-        '  $ retext-mapbox-standard *.md !example.md',
-        '  $ retext-mapbox-standard'
+        '  $ echo "His network looks good" | retext-codex-standard',
+        '  $ retext-codex-standard *.md !example.md',
+        '  $ retext-codex-standard'
     ]
 });
 
@@ -135,7 +135,7 @@ if (!cli.input.length && expextPipeIn) {
 
         file.contents = value;
 
-        result = mapboxStandard(doc).messages;
+        result = codexStandard(doc).messages;
 
         log(file);
     }, bail);
@@ -251,7 +251,7 @@ function processFactory(given) {
                 file.fail(err);
             }
 
-            log(mapboxStandard(file));
+            log(codexStandard(file));
         })
     }
 }
