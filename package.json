@@ -1,6 +1,6 @@
 {
   "name": "retext-codex-standard",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "enforce codex language rules",
   "main": "index.js",
   "scripts": {
