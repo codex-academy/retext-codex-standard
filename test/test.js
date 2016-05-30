@@ -34,14 +34,6 @@ tap.test('retext-codex', function (t) {
     var doc;
 
     t.same(
-        process('We used OSM, Open Street Map, and Open Street Maps'),
-        ['1:9-1:12: Replace “OSM” with “OpenStreetMap”',
-        '1:14-1:29: Replace “Open Street Map” with “OpenStreetMap”',
-        '1:35-1:51: Replace “Open Street Maps” with “OpenStreetMap”'],
-        'OSM'
-    );
-
-    t.same(
         process('This is basically how to do it'),
         ['1:9-1:18: Remove “basically”'],
         'forbidden'
@@ -60,9 +52,40 @@ tap.test('retext-codex', function (t) {
     );
 
     t.same(
-        process('Upload a TIF'),
-        ["1:10-1:13: Replace “TIF” with “TIFF”"],
-        'TIFF not TIF'
+        process('We will be using ExpressJS or Express JS'),
+        ['1:18-1:27: Replace “ExpressJS” with “Express”',
+        '1:31-1:41: Replace “Express JS” with “Express”'],
+        'express'
+    );
+
+    t.same(
+        process('We push code to github'),
+        ['1:17-1:23: Replace “github” with “GitHub”'],
+        'github (wrong)'
+    );
+
+    t.same(
+        process('We push code to GitHub'),
+        [],
+        'GitHub (correct)'
+    );
+
+    t.same(
+        process('html is for content'),
+        ['1:1-1:5: Replace “html” with “HTML”'],
+        'HTML'
+    );
+
+    t.same(
+      process('css is for presentation'),
+      ['1:1-1:4: Replace “css” with “CSS”'],
+      'CSS'
+    );
+
+    t.same(
+      process('Javascript is for behaviour'),
+      ['1:1-1:11: Replace “Javascript” with “JavaScript”'],
+      'JavaScript'
     );
 
     t.same(
@@ -72,27 +95,16 @@ tap.test('retext-codex', function (t) {
     );
 
     t.same(
+      process('Now deploy your node js app to digital ocean'),
+      ['1:17-1:24: Replace “node js” with “Node.JS”',
+      '1:32-1:45: Replace “digital ocean” with “DigitalOcean”'],
+      'deployment'
+    );
+
+    t.same(
         process('This is a length of text'),
         [],
         'no length bug'
-    );
-
-    t.same(
-        process('This endpoint returns geoJSON'),
-        ['1:23-1:30: Replace “geoJSON” with “GeoJSON”'],
-        'OSM'
-    );
-
-    t.same(
-        process('\nThis endpoint returns geoJSON'),
-        ['2:23-2:30: Replace “geoJSON” with “GeoJSON”'],
-        'geoJSON'
-    );
-
-    t.same(
-        process('This endpoint returns `geojson`'),
-        [],
-        'geojson in code'
     );
 
     t.same(

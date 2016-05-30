@@ -1,7 +1,8 @@
 module.exports = {
-    OSM: { replace: ['OpenStreetMap'] },
-    'Open Street Map': { replace: ['OpenStreetMap'] },
-    'Open Street Maps': { replace: ['OpenStreetMap'] },
-    TIF: { replace: ['TIFF'] },
-    codex: { cased: true, replace: ['codeX'] }
+    codex: { cased: true, replace: ['codeX'] },
+    'Digital Ocean': { cased: true, replace: ['DigitalOcean']},
+    'Node JS': { cased: true, replace: ['Node.JS']},
+    'StackOverflow': { cased: true, replace: ['Stack Overflow']},
+    'ExpressJS': { cased: true, replace: ['Express']},
+    'Express JS': { cased: true, replace: ['Express']}
 };
