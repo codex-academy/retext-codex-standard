@@ -12,7 +12,7 @@ module.exports = [
     'HTML',
     'CSS',
     'JavaScript',
-    'JQuery',
+    'jQuery',
     'DOM',
     'TDD',
     'SQL',
